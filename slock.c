@@ -188,7 +188,6 @@ static void
 drawlogo(Display *dpy, struct lock *lock, int color)
 {
     XSetForeground(dpy, lock->gc, lock->colors[color]);
-    XFillRectangles(dpy, lock->win, lock->gc, lock->rectangles, LENGTH(rectangles));
     XSync(dpy, False);
 }
 
