@@ -8,6 +8,7 @@ static const char *textfamily = "serif";
 static const double textcolorred = 255;
 static const double textcolorgreen = 255;
 static const double textcolorblue = 255;
+static const char *clockcolor = "#7ab878";
 
 /* DWM logo settings (dwmlogoandblurscreen patch) */
 static const int logosize = 75;
@@ -51,6 +52,7 @@ ResourcePref resources[] = {
     { "color4", STRING, &colorname[INPUT] },
     { "color1", STRING, &colorname[FAILED] },
     { "color3", STRING, &colorname[CAPS] },
+    { "color14", STRING, &clockcolor },
 };
 
 /* treat a cleared input like a wrong password (color) */

@@ -192,6 +192,17 @@ drawlogo(Display *dpy, struct lock *lock, int color)
 }
 
 static void
+parsecolor(const char *hex, double *r, double *g, double *b)
+{
+    unsigned int ri, gi, bi;
+    if (hex[0] == '#') hex++;
+    sscanf(hex, "%02x%02x%02x", &ri, &gi, &bi);
+    *r = (double)ri;
+    *g = (double)gi;
+    *b = (double)bi;
+}
+
+static void
 refresh(Display *dpy, Window win, int screen, struct tm time, cairo_t *cr, cairo_surface_t *sfc)
 {
     /* Function that displays given time on the given screen */
@@ -203,7 +214,9 @@ refresh(Display *dpy, Window win, int screen, struct tm time, cairo_t *cr, cairo
             time.tm_mday, time.tm_mon + 1, time.tm_year + 1900,
             time.tm_hour, time.tm_min);
     XClearWindow(dpy, win);
-    cairo_set_source_rgb(cr, textcolorred, textcolorgreen, textcolorblue);
+    double r, g, b;
+    parsecolor(clockcolor, &r, &g, &b);
+    cairo_set_source_rgb(cr, r/255.0, g/255.0, b/255.0);
     cairo_select_font_face(cr, textfamily, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
     cairo_set_font_size(cr, textsize);
     cairo_move_to(cr, xpos, ypos);
